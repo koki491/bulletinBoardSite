@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"/>
+    <title>掲示板サイト</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+    <h1>掲示板</h1>
+</header>
+<main>
+    <div>
+        <div id="board-area">
+            <table>
+                <tr th:each="customer : ${customers}">
+                    <td class="input_name" th:text="customer.name">田中太郎</td>
+                    <td class="input_message" th:text="customer.message">晩ご飯は焼肉</td>
+                    <td class="input_dt" th:text="customer.dt">2021-10-10-23:33:33</td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <form method="POST" th:action="@{/customers}" th:object="${customer}">
+            <label class="name">お名前</label>
+            <input th:field="*{name}">
+            <label class="message">メッセージ</label>
+            <textarea rows="5" cols="80" th:field="*{message}">
+                </textarea>
+            <button>投稿</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>
