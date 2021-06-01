@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespaceには対応するMapperインターフェースの完全修飾クラス名を指定 -->
+<mapper namespace="bulletinBoard.repository.UserRepository">
+    <!-- MapperインターフェースのfindAll関数実行時のSQL
+    resultTypeには取得結果をマッピングするクラスを指定 -->
+    <select id="findAll" resultType="bulletinBoard.domain.User">
+        select
+        username,
+        encodedPassword,
+        customers
+        from users
+    </select>
+    <!-- MapperインターフェースのfindByEmail関数実行時のSQL
+    parameterTypeには関数の引数の型を指定 -->
+    <select id="findById" parameterType="string" resultType="bulletinBoard.domain.User">
+        select
+        username,
+        encodedPassword
+        from users
+        where username = #{username}
+    </select>
+    <!-- Mapperインターフェースのsave関数実行時のSQL
+    新規で作成する場合はinsert要素を使用する -->
+    <insert id="save" parameterType="bulletinBoard.domain.User">
+        INSERT INTO user (username, encodedPassword)
+        VALUES (#{username}, #{encodedPassword})
+    </insert>
+
+</mapper>

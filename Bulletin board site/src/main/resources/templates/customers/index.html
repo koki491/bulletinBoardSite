@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"/>
+    <title>掲示板サイト</title>
+    <link href="../../staic/css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+    <h1>掲示板</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" class="btn btn-default btn-xs" value="ログアウト" />
+    </form>
+</header>
+<main>
+    <div>
+        <div id="board-area">
+            <div class="table">
+                <div class="block_line" th:each="customer : ${customers}">
+                    <p class="input_name" th:text="${customer.username}"></p>
+                    <p class="input_message" th:text="${customer.message}"></p>
+                    <p class="input_dt" th:text="${customer.time}"></p>
+                </div>
+            </div>
+<!--            <table>-->
+<!--                <tr th:each="customer : ${customers}" >-->
+<!--                    <td class="input_name" th:text="${customer.name}"></td>-->
+<!--                    <td class="input_message" th:text="${customer.message}"></td>-->
+<!--                    <td class="input_dt" th:text="${customer.time}"></td>-->
+<!--                </tr>-->
+<!--            </table>-->
+        </div>
+        <hr>
+        <form th:action="@{customers/add}" method="post" th:object="${bulletinBoardForm}">
+            <label class="name">お名前</label>
+            <input type="text" id="username" name="username" th:field="*{username}">
+            <label class="message">メッセージ</label>
+            <textarea id="message" name="message" rows="5" cols="80" th:field="*{message}"></textarea>
+            <button type="submit">投稿</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>
