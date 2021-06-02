@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>掲示板サイト</title>
-    <link href="../../staic/css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="../../static/css/style.css" rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <header>
@@ -15,7 +15,7 @@
 </header>
 <main>
     <div>
-        <div id="board-area">
+        <div class="board-area">
             <div class="table">
                 <div class="block_line" th:each="customer : ${customers}">
                     <p class="input_name" th:text="${customer.username}"></p>
