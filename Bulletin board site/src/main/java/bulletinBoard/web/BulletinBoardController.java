@@ -69,7 +69,7 @@ public class BulletinBoardController {
         LocalDateTime nowDateTime = LocalDateTime.now();
         DateTimeFormatter javaFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         Customer customer = new Customer();
-        bulletinBoardForm.setTime(nowDateTime.format(javaFormat));
+        bulletinBoardForm.setDt(nowDateTime.format(javaFormat));
         BeanUtils.copyProperties(bulletinBoardForm, customer);
         customerService.create(customer, userDetails.getUser());
         return "redirect:/customers";

@@ -1,7 +1,7 @@
 package bulletinBoard.service;
 
 import bulletinBoard.domain.User;
-import bulletinBoard.repository.UserRepository;
+import bulletinBoard.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LoginUserDetailsService implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.getById(username);
+        //User user = userRepository.findById(username);
+        User user = new User();
+        user.setUsername(username);
+        user= this.userMapper.findById(user);
         if (user == null) {
             throw new UsernameNotFoundException("The requested user is not found.");
         }

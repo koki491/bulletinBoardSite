@@ -1,7 +1,6 @@
 package bulletinBoard.service;
 
 import java.util.List;
-import java.util.Optional;
 //import java.util.Optional;
 
 import bulletinBoard.domain.User;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bulletinBoard.domain.Customer;
-import bulletinBoard.repository.CustomerRepository;
+import bulletinBoard.repository.CustomerMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -19,14 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerMapper customerMapper;
 
     public List<Customer> findAll() {
-        return customerRepository.findAll();
+        return this.customerMapper.findAll();
     }
 
-    public Optional<Customer> findById(Integer id) {
-        return customerRepository.findById(id);
+    public Customer findById(Integer id) {
+        Customer customer = new Customer();
+        customer.setId(id);
+        return this.customerMapper.findById(customer);
     }
 
 //    public Customer create(Customer customer) {
@@ -37,14 +38,14 @@ public class CustomerService {
 //        return customerRepository.save(customer);
 //    }
 //
-    public Customer create(Customer customer, User user) {
+    public void create(Customer customer, User user) {
         customer.setUser(user);
-        return customerRepository.save(customer);
+        customerMapper.save(customer);
     }
 
-    public Customer update(Customer customer, User user) {
+    public void update(Customer customer, User user) {
         customer.setUser(user);
-        return customerRepository.save(customer);
+        customerMapper.save(customer);
     }
 
 }

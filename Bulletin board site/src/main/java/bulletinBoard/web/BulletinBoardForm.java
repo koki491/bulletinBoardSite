@@ -13,5 +13,5 @@ public class BulletinBoardForm {
     @NotNull
     @Size(min=1, max=400)
     private String message;
-    private String time;
+    private String dt;
 }

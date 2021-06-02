@@ -3,32 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespaceには対応するMapperインターフェースの完全修飾クラス名を指定 -->
-<mapper namespace="bulletinBoard.repository.CustomerRepository">
+<mapper namespace="bulletinBoard.repository.CustomerMapper">
 
     <!--Customerデーブル-->
     <select id="findAll" resultType="bulletinBoard.domain.Customer">
         select
         id,
-        name,
+        username,
         message,
-        time
+        dt
         from customers
     </select>
     <!-- MapperインターフェースのfindByEmail関数実行時のSQL
     parameterTypeには関数の引数の型を指定 -->
-    <select id="findById" parameterType="string" resultType="Customer">
+    <select id="findById" resultType="bulletinBoard.domain.Customer">
         select
         id,
-        name,
+        username,
         message,
-        time
+        dt
         from customers
         where id = #{id}
     </select>
     <!-- Mapperインターフェースのsave関数実行時のSQL
     新規で作成する場合はinsert要素を使用する -->
-    <insert id="save" parameterType="Customer">
-        INSERT INTO user (id, name, message, time)
-        VALUES (#{id}, #{name}, #{message}, #{time})
+    <insert id="save" parameterType="bulletinBoard.domain.Customer">
+        INSERT INTO customers (id, username, message, dt)
+        VALUES (#{id}, #{username}, #{message}, #{dt})
     </insert>
 </mapper>
