@@ -28,7 +28,7 @@ import bulletinBoard.service.CustomerService;
 //    dbの情報を一覧表示
 
 @Controller
-@RequestMapping("customers")
+@RequestMapping(value = "customers")
 public class BulletinBoardController {
     @Autowired
     private CustomerService customerService;
