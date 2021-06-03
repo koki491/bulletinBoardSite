@@ -37,6 +37,18 @@ p {
 	right: 0;
 }
 
+
+.btn btn-outline-primary {
+    top: 0;
+    right: 25px;
+}
+
+.btn btn-outline-danger {
+    top: 0;
+    right: 0;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -48,7 +60,7 @@ form {
     left: 40px;
 }
 
-input {
+.btn-outline {
     position: fixed;
     bottom: 180px;
     left: 100px;
@@ -80,6 +92,7 @@ button {
 }
 
 .home {
-    bottom:10px;
-    left:10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }

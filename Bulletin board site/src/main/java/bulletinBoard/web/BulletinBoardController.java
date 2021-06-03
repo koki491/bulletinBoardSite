@@ -8,19 +8,14 @@ import bulletinBoard.service.LoginUserDetails;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import bulletinBoard.domain.Customer;
 import bulletinBoard.service.CustomerService;
@@ -46,7 +41,7 @@ public class BulletinBoardController {
 
 //    @RequestMapping(value="customers", method = RequestMethod.GET)
 //    @RequestMapping(value = "/loginForm", method = RequestMethod.POST)
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String index(Model model) {
         List<Customer> customers = customerService.findAll();
         model.addAttribute("customers", customers);
@@ -63,7 +58,7 @@ public class BulletinBoardController {
 //        return "redirect:/customers";
 //    }
 
-    @PostMapping("add")
+    @PostMapping(path = "add")
     String create(@Validated BulletinBoardForm bulletinBoardForm, BindingResult result, Model model, @AuthenticationPrincipal LoginUserDetails userDetails) {
         if (result.hasErrors()) {
             return index(model);
@@ -94,10 +89,45 @@ public class BulletinBoardController {
 //        return "redirect:/customers";
 //    }
 
-    @PutMapping("{id}")
-    String update(@PathVariable Integer id, @ModelAttribute Customer customer, @AuthenticationPrincipal LoginUserDetails userDetails) {
+//    @PutMapping("{id}")
+//    String update(@PathVariable Integer id, @ModelAttribute Customer customer, @AuthenticationPrincipal LoginUserDetails userDetails) {
+//        customer.setId(id);
+//        customerService.update(customer, userDetails.getUser());
+//        return "redirect:/customers";
+//    }
+//
+//    @DeleteMapping("{id}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    void deleteCustomer(@PathVariable Integer id) {
+//        customerService.delete(id);
+//    }
+    @PostMapping(path = "edit", params = "form")
+    String editForm(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm) {
+        Customer customer = customerService.findById(id);
+        BeanUtils.copyProperties(customer, bulletinBoardForm);
+        return "redirect:/edit";
+    }
+
+    @PostMapping(path = "edit")
+    String edit(@RequestParam Integer id, @Validated BulletinBoardForm bulletinBoardForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return editForm(id, bulletinBoardForm);
+        }
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(bulletinBoardForm, customer);
         customer.setId(id);
-        customerService.update(customer, userDetails.getUser());
+        customerService.update(customer);
+        return "redirect:/customers";
+    }
+
+    @RequestMapping(path = "edit", params = "goToTop")
+    String goToTop() {
+        return "redirect:/customers";
+    }
+
+    @PostMapping(path = "delete")
+    String delete(@RequestParam Integer id) {
+        customerService.delete(id);
         return "redirect:/customers";
     }
 

@@ -21,4 +21,8 @@ public interface CustomerMapper {
     Customer findById(Customer customer);
 
     void save(Customer customer);
+
+    void update(Customer customer);
+
+    void delete(Integer id);
 }

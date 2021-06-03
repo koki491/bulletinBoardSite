@@ -31,4 +31,13 @@
         INSERT INTO customers (id, username, message, dt)
         VALUES (#{id}, #{username}, #{message}, #{dt})
     </insert>
+
+    <update id="update" parameterType="bulletinBoard.domain.Customer">
+        UPDATE customers SET message = #{message}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="bulletinBoard.domain.Customer">
+        DELETE FROM customers WHERE id = #{id}
+    </delete>
 </mapper>

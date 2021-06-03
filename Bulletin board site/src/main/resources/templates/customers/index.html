@@ -21,6 +21,14 @@
                     <p class="input_name" th:text="${customer.username}"></p>
                     <p class="input_message" th:text="${customer.message}"></p>
                     <p class="input_dt" th:text="${customer.dt}"></p>
+                    <form th:action="@{/customers/edit}" method="get">
+                        <input type="submit" class="btn btn-outline-primary" name="form" value="編集">
+                        <input type="hidden" name="id" th:value="${customer.id}">
+                    </form>
+                    <form th:action="@{/customers/delete}" method="post">
+                        <input type="submit" class="btn btn-outline-danger" value="削除">
+                        <input type="hidden" name="id" th:value="${customer.id}">
+                    </form>
                 </div>
             </div>
 <!--            <table>-->
@@ -34,7 +42,7 @@
         <hr>
         <form th:action="@{customers/add}" method="post" th:object="${bulletinBoardForm}">
             <label class="name">お名前</label>
-            <input type="text" id="username" name="username" th:field="*{username}">
+            <input type="text" class="btn-outline" id="username" name="username" th:field="*{username}">
             <label class="message">メッセージ</label>
             <textarea id="message" name="message" rows="5" cols="80" th:field="*{message}"></textarea>
             <button type="submit">投稿</button>

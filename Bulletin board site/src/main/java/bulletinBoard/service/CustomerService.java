@@ -43,9 +43,12 @@ public class CustomerService {
         customerMapper.save(customer);
     }
 
-    public void update(Customer customer, User user) {
-        customer.setUser(user);
-        customerMapper.save(customer);
+    public void update(Customer customer) {
+        customerMapper.update(customer);
+    }
+
+    public void delete(Integer id) {
+        customerMapper.delete(id);
     }
 
 }

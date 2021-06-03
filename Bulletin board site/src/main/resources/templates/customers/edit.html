@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>メッセージ編集</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/editStyle.css" th:href="@{/css/editStyle.css}">
+</head>
+<body>
+<form th:action="/customers/edit" th:object="${bulletinBoardForm}" method="post">
+    <dl>
+        <dt><label for="message">message</label></dt>
+        <dd>
+            <input type="text" id="message" name="message" th:field="*{message}" th:value="${bulletinBoardForm.message}">
+        </dd>
+    </dl>
+    <input type="submit" name="goToTop" value="戻る" />
+    <input type="hidden" name="id" th:value="${param.id[0]}" />
+    <input type="submit" value="更新" />
+</form>
+</body>
+</html>
