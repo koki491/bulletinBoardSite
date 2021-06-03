@@ -23,5 +23,4 @@ public class User {
     @JsonIgnore
     //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Customer> customers;
-
 }

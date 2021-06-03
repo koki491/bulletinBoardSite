@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 //import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity //Spring Securityの基本的な設計
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -30,18 +30,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/loginForm").permitAll()
+                    //.antMatchers("/loginForm").permitAll()  上手くいくコード
+                    .antMatchers("/", "/newUser").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/login")
+//                .loginProcessingUrl("/login")
                     .loginPage("/loginForm")
                     .failureUrl("/loginForm?error")
                     .defaultSuccessUrl("/customers", true)
                     .usernameParameter("username").passwordParameter("password")
                 .and()
-                .logout()
-                    .logoutSuccessUrl("/loginForm");
+                .logout();
+//                    .logoutSuccessUrl("/loginForm");
     }
 
     @Bean

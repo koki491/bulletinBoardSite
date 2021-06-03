@@ -31,6 +31,7 @@ import bulletinBoard.service.CustomerService;
 //import org.springframework.web.bind.annotation.PutMapping;
 
 //    dbの情報を一覧表示
+
 @Controller
 @RequestMapping("customers")
 public class BulletinBoardController {
@@ -44,6 +45,7 @@ public class BulletinBoardController {
 
 
 //    @RequestMapping(value="customers", method = RequestMethod.GET)
+//    @RequestMapping(value = "/loginForm", method = RequestMethod.POST)
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
         List<Customer> customers = customerService.findAll();

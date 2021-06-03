@@ -1,6 +1,7 @@
 package bulletinBoard.repository;
 
 import bulletinBoard.domain.User;
+import bulletinBoard.web.RegisterUserForm;
 import org.apache.ibatis.annotations.Mapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,6 @@ public interface UserMapper {
     User findById(User user);
 
     List<User> findAll();
+
+    void save(RegisterUserForm registerUserForm);
 }
