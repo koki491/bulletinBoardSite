@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
@@ -30,8 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    //.antMatchers("/loginForm").permitAll()  上手くいくコード
-                    .antMatchers("/", "/newUser").permitAll()
+                    //.antMatchers("/loginForm").permitAll()  //上手くいくコード
+                    .antMatchers("/", "/newUser", "/loginForm").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -41,7 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/customers", true)
                     .usernameParameter("username").passwordParameter("password")
                 .and()
-                .logout();
+                .logout()
+                .permitAll();
 //                    .logoutSuccessUrl("/loginForm");
     }
 

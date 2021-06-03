@@ -78,3 +78,8 @@ button {
     width: 150px;
     height: 25px;
 }
+
+.home {
+    bottom:10px;
+    left:10px;
+}

@@ -21,10 +21,10 @@ public class LoginController {
     }
 
     //ログイン画面
-    @GetMapping(value = "/loginForm")
+    @RequestMapping(value = "/loginForm", method = RequestMethod.GET)
     public String loginForm(Model model) {
         return "loginForm";
-    } //ここが問題ではない
+    }
 
     @PostMapping("/loginForm")
     public String postLogin(Model model) {
