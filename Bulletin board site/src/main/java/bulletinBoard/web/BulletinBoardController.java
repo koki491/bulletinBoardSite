@@ -5,10 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import bulletinBoard.service.LoginUserDetails;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ import bulletinBoard.service.CustomerService;
 //    dbの情報を一覧表示
 
 @Controller
-@RequestMapping(value = "customers")
+@RequestMapping(path = "customers")
 public class BulletinBoardController {
     @Autowired
     private CustomerService customerService;
@@ -101,15 +101,21 @@ public class BulletinBoardController {
 //    void deleteCustomer(@PathVariable Integer id) {
 //        customerService.delete(id);
 //    }
-    @PostMapping(path = "edit", params = "form")
+
+    @GetMapping(path = "edit", params = "form")
     String editForm(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm) {
         Customer customer = customerService.findById(id);
         BeanUtils.copyProperties(customer, bulletinBoardForm);
-        return "redirect:/edit";
+        return "customers/edit";
+    }
+
+    @RequestMapping(path = "edit", params = "goToTop", method = RequestMethod.POST)
+    String goToTop() {
+        return "redirect:/customers";
     }
 
     @PostMapping(path = "edit")
-    String edit(@RequestParam Integer id, @Validated BulletinBoardForm bulletinBoardForm, BindingResult result) {
+    String edit(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, @NotNull BindingResult result) {
         if (result.hasErrors()) {
             return editForm(id, bulletinBoardForm);
         }
@@ -117,11 +123,6 @@ public class BulletinBoardController {
         BeanUtils.copyProperties(bulletinBoardForm, customer);
         customer.setId(id);
         customerService.update(customer);
-        return "redirect:/customers";
-    }
-
-    @RequestMapping(path = "edit", params = "goToTop")
-    String goToTop() {
         return "redirect:/customers";
     }
 

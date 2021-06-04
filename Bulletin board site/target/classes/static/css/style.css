@@ -2,6 +2,19 @@ h1 {
     text-align: center;
 }
 
+input[type="submit"] {
+    -webkit-appearance: none;
+}
+
+.btn-logout {
+    font-size: 16px;
+    padding: 2px;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .board-area {
     height: 700px;
     overflow:scroll;
@@ -16,6 +29,17 @@ h1 {
 	position: relative;
 
 
+}
+
+.input_form {
+    position: absolute;
+    right: 0;
+}
+
+.input_delete_form {
+    position: absolute;
+    top: 30px;
+    right: 0;
 }
 
 p {
@@ -35,17 +59,6 @@ p {
 .input_dt {
 	bottom: 0;
 	right: 0;
-}
-
-
-.btn btn-outline-primary {
-    top: 0;
-    right: 25px;
-}
-
-.btn btn-outline-danger {
-    top: 0;
-    right: 0;
 }
 
 
@@ -76,10 +89,11 @@ form {
 
 textarea {
     position: fixed;
+    display: flex;
+    justify-content: center;
     bottom: 50px;
-    left: 0;
-    right: 0;
     height: 100px;
+    width: 100%;
     border: 2px solid black;
 }
 
