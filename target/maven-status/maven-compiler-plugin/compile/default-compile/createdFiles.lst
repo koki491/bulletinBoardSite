@@ -1,0 +1,6 @@
+bulletinBoard/service/CustomerService.class
+bulletinBoard/repository/CustomerRepository.class
+bulletinBoard/domain/Customer.class
+bulletinBoard/web/BulletinBoardController.class
+bulletinBoard/Main.class
+bulletinBoard/web/BulletinBoardForm.class
