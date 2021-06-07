@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 
-import bulletinBoard.repository.CustomerMapper;
+import bulletinBoard.repository.PostMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 public class Main implements CommandLineRunner{
 
     @Autowired
-    CustomerMapper customerMapper;
+    PostMapper postMapper;
 
     @Override
     public void run(String... strings) throws Exception {

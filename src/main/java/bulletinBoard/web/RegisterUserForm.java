@@ -1,8 +1,6 @@
 package bulletinBoard.web;
 
-//import bulletinBoard.domain.User;
 import lombok.Data;
-//import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

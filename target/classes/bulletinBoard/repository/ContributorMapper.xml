@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespaceには対応するMapperインターフェースの完全修飾クラス名を指定 -->
+<mapper namespace="bulletinBoard.repository.ContributorMapper">
+
+    <!-- Mapperインターフェースのsave関数実行時のSQL
+    新規で作成する場合はinsert要素を使用する -->
+    <insert id="save" parameterType="bulletinBoard.domain.Contributor">
+        INSERT INTO contributor (userid, username)
+        VALUES (#{id}, #{username})
+    </insert>
+    <delete id="delete" parameterType="bulletinBoard.domain.Contributor">
+        DELETE FROM contributor WHERE userid = #{id}
+    </delete>
+</mapper>

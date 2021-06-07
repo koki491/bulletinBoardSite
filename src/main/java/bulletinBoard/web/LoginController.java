@@ -13,7 +13,6 @@ public class LoginController {
     @Autowired
     private RegisterUserService registerUserService;
 
-    //@GetMapping(path = "loginForm")
     //トップページ
     @RequestMapping(value = "/")
     public String topPage() {
@@ -58,8 +57,4 @@ public class LoginController {
         return mav;
     }
 
-//    @RequestMapping(value = "/myPage")
-//    public String myPage() {
-//        return "myPage";
-//    }
 }

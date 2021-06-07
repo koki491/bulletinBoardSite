@@ -18,7 +18,6 @@ public class LoginUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        //User user = userRepository.findById(username);
         User user = new User();
         user.setUsername(username);
         user= this.userMapper.findById(user);
