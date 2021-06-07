@@ -1,0 +1,15 @@
+# For idea
+**/out
+.idea
+*.iml
+*.ipr
+*.iws
+
+# For eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# For mac
+.DS_Store
