@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"/>
+    <title>掲示板サイト</title>
+    <link href="../static/css/topicStyle.css" rel="stylesheet" type="text/css" th:href="@{/css/topicStyle.css}"/>
+</head>
+<body>
+<div class="entire">
+        <div class="header">
+            <p class="element1">掲示板</p>
+            <p class="element2">投稿数</p>
+            <p class="element3">カテゴリ</p>
+        </div>
+        <div class="body" th:each="topic : ${topic}">
+            <div class="main-body">
+                <p class="element1" th:text="${topic.title}">あなたの好きなお菓子</p>
+                <p class="element2" th:text="${topic.post_num}">14</p>
+                <p class="element3" th:text="${topic.category_id}">#雑談</p>
+            </div>
+            <div class="sub-body">
+                <p class="element1" th:text="${topic.contents}">あなたの好きなお菓子はなんですか</p>
+            </div>
+        </div>
+</div>
+
+
+<a class="home" href="/">戻る</a>
+</body>
+</html>

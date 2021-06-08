@@ -1,0 +1,48 @@
+.entire {
+    width: 80%;
+    height: 1000px;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+table {
+    width:1500px;
+}
+
+.header {
+    background-color: green;
+    font-size: 20px;
+}
+
+.header p {
+    display: inline-block;
+}
+
+.body {
+    overflow: scroll;
+    border: 2px solid black;
+}
+
+.body p {
+    display: inline-block;
+}
+
+.main-body {
+    font-size: 18px;
+}
+
+.sub-body {
+    font-size: 15px;
+}
+
+.element1 {
+    width: 1000px;
+}
+
+.element2 {
+    width: 200px;
+}
+
+.element3 {
+
+}
