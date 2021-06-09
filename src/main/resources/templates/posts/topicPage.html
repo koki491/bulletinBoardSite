@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>掲示板サイト</title>
+    <link href="../../static/css/topicStyle.css" rel="stylesheet" type="text/css" th:href="@{/css/topicStyle.css}"/>
+</head>
+<body>
+<div class="entire">
+        <div class="header">
+            <p class="element1">掲示板</p>
+            <p class="element2">投稿数</p>
+            <p class="element3">カテゴリ</p>
+        </div>
+        <div class="body" th:each="topic : ${topics}">
+            <div class="main-body">
+                <form class="input_form" th:action="@{/posts/index}" method="get">
+                    <input type="submit" class="element1" name="goToIndex" value="お菓子">
+                    <input type="hidden" name="id" th:value="${topic.id}">
+                    <!--<p class="element1"><a href="javascript:goToIndex.submit()" th:text="${topic.title}">あなたの好きなお菓子</a></p>-->
+                </form>
+                <p class="element2" th:text="${topic.post_num}">14</p>
+                <p class="element3" th:text="${topic.category_name}">#雑談</p>
+            </div>
+            <div class="sub-body">
+                <p class="element1" th:text="${topic.contents}">あなたの好きなお菓子はなんですか</p>
+            </div>
+        </div>
+</div>
+
+
+<a class="home" href="/">戻る</a>
+</body>
+</html>

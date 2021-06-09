@@ -7,6 +7,7 @@ import java.util.List;
 import bulletinBoard.domain.Contributor;
 import bulletinBoard.service.ContributorService;
 import bulletinBoard.service.LoginUserDetails;
+import bulletinBoard.service.TopicService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import bulletinBoard.domain.Topic;
 import bulletinBoard.domain.Post;
 import bulletinBoard.service.PostService;
 
@@ -29,6 +31,8 @@ public class BulletinBoardController {
     private PostService postService;
     @Autowired
     private ContributorService contributorService;
+    @Autowired
+    private TopicService topicService;
     
     @ModelAttribute
     BulletinBoardForm bulletinBoardForm() {
@@ -36,23 +40,32 @@ public class BulletinBoardController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        List<Post> posts = postService.findAll();
+    public String topicPage(Model model) {
+        List<Topic> topics = topicService.findAll();
+        model.addAttribute("topics", topics);
+        return "posts/topicPage";
+    }
+
+    @GetMapping(path = "index", params="goToIndex")
+    public String index(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, Model model) {
+        List<Post> posts = postService.findByTopicId(id);
         model.addAttribute("posts", posts);
         return "posts/index";
     }
 
     @PostMapping(path = "add")
     String create(@Validated BulletinBoardForm bulletinBoardForm, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return index(model);
-        }
+//        if (result.hasErrors()) {
+//            return index(model);
+//        }
         LocalDateTime nowDateTime = LocalDateTime.now();
         DateTimeFormatter javaFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         Post post = new Post();
         bulletinBoardForm.setDt(nowDateTime.format(javaFormat));
+        //messageとdtをpostにいれる
         BeanUtils.copyProperties(bulletinBoardForm, post);
         Contributor contributor = new Contributor();
+        //usernameをcontributorにいれる
         BeanUtils.copyProperties(bulletinBoardForm, contributor);
         postService.create(post);
         contributorService.create(contributor);

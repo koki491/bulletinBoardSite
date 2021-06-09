@@ -34,7 +34,7 @@ public class Main implements CommandLineRunner{
     @Bean
     public DataSource dataSource() {
         return DataSourceBuilder.create()
-                .url("jdbc:mysql://localhost:3306/customer")
+                .url("jdbc:mysql://localhost:3306/bulletinBoard")
                 .username("root")
                 .password("testroot")
                 .build();

@@ -9,31 +9,46 @@
     <select id="findAll" resultType="bulletinBoard.domain.Post">
         select
         id,
-        username,
+        post_user,
         message,
         dt
         from posts
         INNER JOIN contributor
-        ON posts.id = contributor.userid
+        ON posts.contributor_id = contributor.id
     </select>
     <!-- MapperインターフェースのfindByEmail関数実行時のSQL
     parameterTypeには関数の引数の型を指定 -->
     <select id="findById" resultType="bulletinBoard.domain.Post">
         select
-        id,
-        username,
+        posts.id,
+        post_user,
         message,
         dt
         from posts
-        INNER JOIN contributor
-        ON posts.id = contributor.userid
-        where id = #{id}
+        LEFT JOIN contributor
+        ON posts.contributor_id = contributor.id
+        where posts.id = #{id}
+    </select>
+
+    <select id="findByTopicId" resultType="bulletinBoard.domain.Post">
+        select
+        posts.id,
+        post_user
+        message,
+        dt,
+        topic_id
+        from posts
+        LEFT JOIN topic
+        ON posts.topic_id = topic.id
+        LEFT JOIN contributor
+        ON posts.contributor_id = contributor.id
+        where topic_id = #{topic_id}
     </select>
     <!-- Mapperインターフェースのsave関数実行時のSQL
     新規で作成する場合はinsert要素を使用する -->
     <insert id="save" parameterType="bulletinBoard.domain.Post">
-        INSERT INTO posts (id, message, dt)
-        VALUES (#{id}, #{message}, #{dt})
+        INSERT INTO posts (id, contributor_id, message, dt, topic_id)
+        VALUES (#{id}, #{contributor_id}, #{message}, #{dt}, #{topic_id})
     </insert>
 
     <update id="update" parameterType="bulletinBoard.domain.Post">

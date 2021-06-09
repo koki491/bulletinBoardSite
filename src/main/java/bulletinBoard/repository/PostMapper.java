@@ -10,6 +10,8 @@ import java.util.List;
 public interface PostMapper {
     List<Post> findAll();
 
+    List<Post> findByTopicId(Post post);
+
     Post findById(Post post);
 
     void save(Post post);

@@ -20,6 +20,12 @@ public class PostService {
         return this.postMapper.findAll();
     }
 
+    public List<Post> findByTopicId(Integer id) {
+        Post post = new Post();
+        post.setTopic_id(id);
+        return this.postMapper.findByTopicId(post);
+    }
+
     public Post findById(Integer id) {
         Post post = new Post();
         post.setId(id);

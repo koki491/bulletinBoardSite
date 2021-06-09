@@ -12,4 +12,5 @@ public class Post {
     private String username;
     private String message;
     private String dt;
+    private Integer topic_id;
 }

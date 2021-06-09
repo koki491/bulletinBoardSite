@@ -11,11 +11,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "customers")
+@ToString(exclude = "contributor")
 public class User {
     private String username; //primary key
     @JsonIgnore
     private String encoded_password;
     @JsonIgnore
-    private List<Post> post;
+    private List<Contributor> contributor;
 }

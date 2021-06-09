@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contributor {
-    private Integer id;
-    private String username;
-    private Integer user_id;
+public class Topic {
+    private int id;
+    private String title;
+    private String contents;
+    private int post_num;
+    private String category_name;
 }
