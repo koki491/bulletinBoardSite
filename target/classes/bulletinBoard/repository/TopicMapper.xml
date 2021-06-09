@@ -31,4 +31,9 @@
         ON topic.category_id = category.id
         where id = #{id}
     </select>
+
+    <update id="update" parameterType="bulletinBoard.domain.Topic">
+        UPDATE topic SET post_num = (SELECT COUNT(*) FROM posts WHERE topic_id = #{id})
+        WHERE id = #{id}
+    </update>
 </mapper>

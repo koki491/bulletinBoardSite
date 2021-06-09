@@ -39,17 +39,16 @@ public class BulletinBoardController {
         return new BulletinBoardForm();
     }
 
-    @GetMapping
+    @GetMapping(path = "topicPage")
     public String topicPage(Model model) {
         List<Topic> topics = topicService.findAll();
         model.addAttribute("topics", topics);
         return "posts/topicPage";
     }
 
-    @GetMapping(path = "index", params="goToIndex")
+    @GetMapping
     public String index(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, Model model) {
         List<Post> posts = postService.findByTopicId(id);
-        System.out.println(posts);
         model.addAttribute("posts", posts);
         return "posts/index";
     }
@@ -70,8 +69,11 @@ public class BulletinBoardController {
         Contributor contributor = new Contributor();
         //usernameをcontributorにいれる
         BeanUtils.copyProperties(bulletinBoardForm, contributor);
+        Topic topic = new Topic();
+        topic.setId(1);
         postService.create(post);
         contributorService.create(contributor);
+        topicService.update(topic);
         return "redirect:/posts";
     }
 
@@ -103,6 +105,9 @@ public class BulletinBoardController {
     String delete(@RequestParam Integer id) {
         postService.delete(id);
         contributorService.delete(id);
+        Topic topic = new Topic();
+        topic.setId(1);
+        topicService.update(topic);
         return "redirect:/posts";
     }
 

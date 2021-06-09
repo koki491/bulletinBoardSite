@@ -24,4 +24,8 @@ public class TopicService {
         topic.setId(id);
         return this.topicMapper.findById(topic);
     }
+
+    public void update(Topic topic) {
+        topicMapper.update(topic);
+    }
 }

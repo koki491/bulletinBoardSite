@@ -10,4 +10,6 @@ public interface TopicMapper {
     List<Topic> findAll();
 
     Topic findById(Topic topic);
+
+    void update(Topic topic);
 }
