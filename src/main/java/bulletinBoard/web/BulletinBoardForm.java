@@ -14,4 +14,5 @@ public class BulletinBoardForm {
     @Size(min=1, max=400)
     private String message;
     private String dt;
+    private Integer topic_id;
 }

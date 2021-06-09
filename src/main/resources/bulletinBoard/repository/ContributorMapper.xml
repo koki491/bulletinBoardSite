@@ -8,13 +8,11 @@
     <!-- Mapperインターフェースのsave関数実行時のSQL
     新規で作成する場合はinsert要素を使用する -->
     <insert id="save" parameterType="bulletinBoard.domain.Contributor">
-        INSERT INTO contributor (post_user, post_id)
-        VALUES (#{username}, #{post_id})
+        INSERT INTO contributor (post_user, user_id)
+        VALUES (#{username}, #{user_id})
     </insert>
     <delete id="delete" parameterType="bulletinBoard.domain.Contributor">
         DELETE FROM contributor
-        INNER JOIN posts
-        ON contributor.id = posts.contributor_id
-        WHERE posts.id = #{user_id}
+        WHERE contributor.id = #{id}
     </delete>
 </mapper>

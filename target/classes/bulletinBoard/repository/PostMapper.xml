@@ -14,7 +14,7 @@
         dt
         from posts
         INNER JOIN contributor
-        ON posts.contributor_id = contributor.id
+        ON posts.id = contributor.id
     </select>
     <!-- MapperインターフェースのfindByEmail関数実行時のSQL
     parameterTypeには関数の引数の型を指定 -->
@@ -26,14 +26,14 @@
         dt
         from posts
         LEFT JOIN contributor
-        ON posts.contributor_id = contributor.id
+        ON posts.id = contributor.id
         where posts.id = #{id}
     </select>
 
     <select id="findByTopicId" resultType="bulletinBoard.domain.Post">
         select
         posts.id,
-        post_user
+        post_user,
         message,
         dt,
         topic_id
@@ -41,7 +41,7 @@
         LEFT JOIN topic
         ON posts.topic_id = topic.id
         LEFT JOIN contributor
-        ON posts.contributor_id = contributor.id
+        ON posts.id = contributor.id
         where topic_id = #{topic_id}
     </select>
     <!-- Mapperインターフェースのsave関数実行時のSQL

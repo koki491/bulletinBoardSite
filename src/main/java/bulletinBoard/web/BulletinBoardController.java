@@ -49,6 +49,7 @@ public class BulletinBoardController {
     @GetMapping(path = "index", params="goToIndex")
     public String index(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, Model model) {
         List<Post> posts = postService.findByTopicId(id);
+        System.out.println(posts);
         model.addAttribute("posts", posts);
         return "posts/index";
     }
@@ -62,6 +63,8 @@ public class BulletinBoardController {
         DateTimeFormatter javaFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         Post post = new Post();
         bulletinBoardForm.setDt(nowDateTime.format(javaFormat));
+        //後々topicテーブルのidをいれる
+        bulletinBoardForm.setTopic_id(1);
         //messageとdtをpostにいれる
         BeanUtils.copyProperties(bulletinBoardForm, post);
         Contributor contributor = new Contributor();

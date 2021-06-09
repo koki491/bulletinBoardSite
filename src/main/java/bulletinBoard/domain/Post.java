@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Post {
     private Integer id;
-    private String username;
+    private Integer contributor_id;
+    private String post_user;
     private String message;
     private String dt;
     private Integer topic_id;

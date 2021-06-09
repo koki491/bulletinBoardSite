@@ -18,7 +18,7 @@
         <div class="board-area">
             <div class="table">
                 <div class="block_line" th:each="post : ${posts}">
-                    <p class="input_name" th:text="${post.username}"></p>
+                    <p class="input_name" th:text="${post.post_user}"></p>
                     <p class="input_message" th:text="${post.message}"></p>
                     <p class="input_dt" th:text="${post.dt}"></p>
                     <form class="input_form" th:action="@{/posts/edit}" method="get">
@@ -33,7 +33,7 @@
             </div>
         </div>
         <hr>
-        <form th:action="@{posts/add}" method="post" th:object="${bulletinBoardForm}">
+        <form th:action="@{/posts/add}" method="post" th:object="${bulletinBoardForm}">
             <label class="name">お名前</label>
             <input type="text" class="btn-outline" id="username" name="username" th:field="*{username}">
             <label class="message">メッセージ</label>
