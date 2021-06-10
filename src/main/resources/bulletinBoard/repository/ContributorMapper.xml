@@ -9,7 +9,7 @@
     新規で作成する場合はinsert要素を使用する -->
     <insert id="save" parameterType="bulletinBoard.domain.Contributor">
         INSERT INTO contributor (post_user, user_id)
-        VALUES (#{username}, #{user_id})
+        VALUES (#{username}, (SELECT id FROM users WHERE username = #{username1} AND encoded_password = #{encoded_password1}))
     </insert>
     <delete id="delete" parameterType="bulletinBoard.domain.Contributor">
         DELETE FROM contributor

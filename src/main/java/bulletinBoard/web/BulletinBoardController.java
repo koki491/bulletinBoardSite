@@ -62,7 +62,7 @@ public class BulletinBoardController {
     }
 
     @PostMapping(path = "add")
-    String create(@Validated BulletinBoardForm bulletinBoardForm, BindingResult result, Model model) {
+    String create(@Validated BulletinBoardForm bulletinBoardForm, BindingResult result, Model model, @AuthenticationPrincipal LoginUserDetails userDetails) {
 //        if (result.hasErrors()) {
 //            return index(model);
 //        }
@@ -78,8 +78,8 @@ public class BulletinBoardController {
         BeanUtils.copyProperties(bulletinBoardForm, contributor);
         Topic topic = new Topic();
         topic.setId(i);
+        contributorService.create(contributor, userDetails.getUser().getUsername(), userDetails.getUser().getEncoded_password());
         postService.create(post);
-        contributorService.create(contributor);
         topicService.update(topic);
         return "redirect:/posts";
     }

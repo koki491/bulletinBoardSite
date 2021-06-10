@@ -14,7 +14,7 @@
         dt
         from posts
         INNER JOIN contributor
-        ON posts.id = contributor.id
+        ON posts.contributor_id = contributor.id
     </select>
     <!-- MapperインターフェースのfindByEmail関数実行時のSQL
     parameterTypeには関数の引数の型を指定 -->
@@ -26,7 +26,7 @@
         dt
         from posts
         LEFT JOIN contributor
-        ON posts.id = contributor.id
+        ON posts.contributor_id = contributor.id
         where posts.id = #{id}
     </select>
 
@@ -41,14 +41,14 @@
         LEFT JOIN topic
         ON posts.topic_id = topic.id
         LEFT JOIN contributor
-        ON posts.id = contributor.id
+        ON posts.contributor_id = contributor.id
         where topic_id = #{topic_id}
     </select>
     <!-- Mapperインターフェースのsave関数実行時のSQL
     新規で作成する場合はinsert要素を使用する -->
     <insert id="save" parameterType="bulletinBoard.domain.Post">
         INSERT INTO posts (id, contributor_id, message, dt, topic_id)
-        VALUES (#{id}, #{contributor_id}, #{message}, #{dt}, #{topic_id})
+        VALUES (#{id}, (SELECT id FROM contributor ORDER BY id DESC LIMIT 1), #{message}, #{dt}, #{topic_id})
     </insert>
 
     <update id="update" parameterType="bulletinBoard.domain.Post">

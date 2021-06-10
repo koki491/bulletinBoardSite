@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class Contributor {
     private Integer contributor_id;
     private String username;
-    private Integer user_id;
+    private String username1;
+    private String encoded_password1;
 }
