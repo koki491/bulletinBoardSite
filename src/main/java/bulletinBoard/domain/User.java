@@ -13,9 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString(exclude = "contributor")
 public class User {
+    private Integer user_id;
     private String username; //primary key
-    @JsonIgnore
     private String encoded_password;
-    @JsonIgnore
-    private List<Contributor> contributor;
 }

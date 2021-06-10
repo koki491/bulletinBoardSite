@@ -10,8 +10,7 @@ public class BulletinBoardForm {
     @NotNull
     @Size(min=1, max=16)
     private String username;
-    @NotNull
-    @Size(min=1, max=400)
+    private Integer contributor_id;
     private String message;
     private String dt;
     private Integer topic_id;

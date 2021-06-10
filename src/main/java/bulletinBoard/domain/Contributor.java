@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Contributor {
-    private Integer id;
+    private Integer contributor_id;
     private String username;
     private Integer user_id;
 }

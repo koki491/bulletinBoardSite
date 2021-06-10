@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Topic {
-    private int id;
+    private Integer id;
     private String title;
     private String contents;
-    private int post_num;
+    private Integer post_num;
     private String category_name;
 }

@@ -14,10 +14,10 @@
         </div>
         <div class="body" th:each="topic : ${topics}">
             <div class="main-body">
-                <form class="input_form" th:action="@{/posts}" method="get">
+                <form class="input_form" id="form1" th:action="@{/posts}" method="get">
                     <input type="submit" class="element1" value="お菓子">
+                    <!--<p class="element1"><a href="javascript:document.form_hoge.submit; return false;" th:text="${topic.title}">あなたの好きなお菓子</a></p>-->
                     <input type="hidden" name="id" th:value="${topic.id}">
-                    <!--<p class="element1"><a href="javascript:goToIndex.submit()" th:text="${topic.title}">あなたの好きなお菓子</a></p>-->
                 </form>
                 <p class="element2" th:text="${topic.post_num}">14</p>
                 <p class="element3" th:text="${topic.category_name}">#雑談</p>

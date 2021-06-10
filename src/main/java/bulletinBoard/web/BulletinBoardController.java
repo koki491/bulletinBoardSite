@@ -21,12 +21,17 @@ import org.springframework.web.bind.annotation.*;
 import bulletinBoard.domain.Topic;
 import bulletinBoard.domain.Post;
 import bulletinBoard.service.PostService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 //    dbの情報を一覧表示
 
 @Controller
 @RequestMapping(path = "posts")
 public class BulletinBoardController {
+
+    //TopicId
+    Integer i = 0;
+
     @Autowired
     private PostService postService;
     @Autowired
@@ -47,8 +52,11 @@ public class BulletinBoardController {
     }
 
     @GetMapping
-    public String index(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, Model model) {
-        List<Post> posts = postService.findByTopicId(id);
+    public String index(@RequestParam(required = false) Integer id, BulletinBoardForm bulletinBoardForm, Model model) {
+        if(id!=null){
+            i = id;
+        }
+        List<Post> posts = postService.findByTopicId(i);
         model.addAttribute("posts", posts);
         return "posts/index";
     }
@@ -62,15 +70,14 @@ public class BulletinBoardController {
         DateTimeFormatter javaFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         Post post = new Post();
         bulletinBoardForm.setDt(nowDateTime.format(javaFormat));
-        //後々topicテーブルのidをいれる
-        bulletinBoardForm.setTopic_id(1);
+        bulletinBoardForm.setTopic_id(i);
         //messageとdtをpostにいれる
         BeanUtils.copyProperties(bulletinBoardForm, post);
         Contributor contributor = new Contributor();
         //usernameをcontributorにいれる
         BeanUtils.copyProperties(bulletinBoardForm, contributor);
         Topic topic = new Topic();
-        topic.setId(1);
+        topic.setId(i);
         postService.create(post);
         contributorService.create(contributor);
         topicService.update(topic);
@@ -90,7 +97,7 @@ public class BulletinBoardController {
     }
 
     @PostMapping(path = "edit")
-    String edit(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, @NotNull BindingResult result) {
+    String edit(@RequestParam Integer id, BulletinBoardForm bulletinBoardForm, @NotNull BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return editForm(id, bulletinBoardForm);
         }
@@ -98,6 +105,8 @@ public class BulletinBoardController {
         BeanUtils.copyProperties(bulletinBoardForm, post);
         post.setId(id);
         postService.update(post);
+
+//        redirectAttributes.addFlashAttribute("id", id);
         return "redirect:/posts";
     }
 
@@ -106,7 +115,7 @@ public class BulletinBoardController {
         postService.delete(id);
         contributorService.delete(id);
         Topic topic = new Topic();
-        topic.setId(1);
+        topic.setId(i);
         topicService.update(topic);
         return "redirect:/posts";
     }
